@@ -11,18 +11,19 @@ import javax.swing.JPanel;
 import Logical.Player;
 
 public class GUIPlayer extends JFrame{
-	private static GUIActivityFeed activityFeed = new GUIActivityFeed();
 	private JPanel gamePanel;
 
 	private Player player;
 
+	private GUIActivityFeed activityFeed;
 	private GUIGiocata giocata;
 
 	public GUIPlayer(Player p) {
-		super("Briscola");
-		//this.giocata = p.getGame().getGiocata().getGUI();
+		super("Briscola - "+p.getNome());
+		this.setIconImage(p.getGame().ICO.getImage());
 		this.giocata = p.getGame().getGiocata().getGUI();
-
+		this.activityFeed = p.getGame().getLOG();
+		
 		this.player = p;
 
 		this.setBounds(300, 100, 900, 700);
@@ -71,7 +72,7 @@ public class GUIPlayer extends JFrame{
 
 		JPanel acPanel = new JPanel();
 		acPanel.setLayout(new GridLayout(1,1));
-		acPanel.add(activityFeed);
+		acPanel.add(activityFeed.getThing());
 
 		p.add(acPanel);
 
@@ -113,7 +114,6 @@ public class GUIPlayer extends JFrame{
 
 		JPanel centerPanel = new JPanel();
 		centerPanel.setLayout(new FlowLayout());
-		//centerPanel.add(new Gap(), BorderLayout.WEST);
 		centerPanel.add(giocata.getPanel());
 
 		gamePanel.add(centerPanel);
@@ -123,9 +123,5 @@ public class GUIPlayer extends JFrame{
 
 	public Player getPlayer() {
 		return this.player;
-	}
-
-	public static GUIActivityFeed getActivityFeed() {
-		return activityFeed;
 	}
 }
