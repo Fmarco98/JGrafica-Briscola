@@ -16,25 +16,27 @@ public class GUIPlayer extends JFrame{
 	
 	private Player player;
 	
-	
+	private GUIGiocata giocata;
 	
 	public GUIPlayer(Player p) {
 		super("Briscola");
+		this.giocata = p.getGame().getGiocata().getGUI();
 		
 		this.player = p;
 		
+		this.setBounds(300, 100, 900, 700);
+		this.setMinimumSize(new Dimension(800, 700));
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.desing();
 		this.setVisible(true);
 	}
 	
 	public void desing() {
-		this.setBounds(300, 100, 900, 700);
-		this.setMinimumSize(new Dimension(500, 300));
-		
 		this.getContentPane().setLayout(new BorderLayout());
 		this.add(leftPanel(), BorderLayout.WEST);
 		this.add(gamePanel());
+		
+		//this.repaint();
 	}
 	
 	private JPanel leftPanel() {
@@ -74,11 +76,12 @@ public class GUIPlayer extends JFrame{
 			JPanel carta = new JPanel();
 			carta.setLayout(new BorderLayout());
 			
-			JLabel ico = new JLabel();
-			ico.setIcon(this.player.getMano().getMano().get(i).getFrontImage());
-			carta.add(ico);
+			//JLabel ico = new JLabel();
+			//ico.setIcon(this.player.getMano().getMano().get(i).getFrontImage());
+			//carta.add(ico);
 			
-			CardSelectionButton button = new CardSelectionButton(this.player.getMano().getMano().get(i), i);
+			CardSelectionButton button = new CardSelectionButton(/*this.player.getMano().getMano().get(i), */ this.player, i);
+			button.setIcon(this.player.getMano().getMano().get(i).getFrontImage());
 			carta.add(button, BorderLayout.SOUTH);
 			
 			selectionPanel.add(carta);
@@ -96,6 +99,13 @@ public class GUIPlayer extends JFrame{
 		briscolaPanel.add(icon);
 		
 		gamePanel.add(briscolaPanel, BorderLayout.WEST);
+		
+		JPanel centerPanel = new JPanel();
+		centerPanel.setLayout(new FlowLayout());
+		//centerPanel.add(new Gap(), BorderLayout.WEST);
+		centerPanel.add(giocata);
+		
+		gamePanel.add(centerPanel);
 		
 		return gamePanel;
 	}

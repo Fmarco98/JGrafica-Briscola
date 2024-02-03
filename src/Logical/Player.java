@@ -1,4 +1,7 @@
 package Logical;
+
+import GUI.GUIPlayer;
+
 public class Player{
 	private Gioco game;
 	
@@ -7,12 +10,16 @@ public class Player{
 	private String nome;
 	private Mano mano;
 	
+	private GUIPlayer gui;
+	
 	public Player(String nome, Gioco game, int i) {
 		this.index = i;
 		this.game = game;
 		this.punti = 0;
 		this.nome = nome;
 		this.mano = new Mano(this.game.getMazzo());
+		
+		gui = new GUIPlayer(this);
 	}
 	
 	public String getNome() {
@@ -49,5 +56,11 @@ public class Player{
 	}
 	public Gioco getGame() {
 		return this.game;
+	}
+	public int getIndex() {
+		return this.index;
+	}
+	public GUIPlayer getGUI() {
+		return this.gui;
 	}
 }
