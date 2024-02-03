@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 
 import Logical.Carta;
 import Logical.Player;
@@ -25,11 +26,14 @@ public class CardSelectionButton extends JButton{
 					
 					Carta played = c.getPlayer().gioca(index);
 					c.getPlayer().getGame().getGiocata().addGiocata(played, c.getPlayer());
-					c.getPlayer().getGame().getGiocata().getGUI().aggiorna();
 					
 					for(Player p: c.getPlayer().getGame().getPlayers()) {
-						p.getGUI().desing();
+						p.getGUI().aggiorna();
 					}
+					JFrame f = new JFrame();
+					f.setVisible(true);
+					f.setSize(400, 500);
+					f.getContentPane().add(c.getPlayer().getGame().getGiocata().getGUI().getPanel());
 					
 					c.getPlayer().getGame().getTurno().nextTurno();
 				}

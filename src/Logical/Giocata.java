@@ -30,8 +30,8 @@ public class Giocata {
 	}
 	
 	public void clear() {
-		for(Player p: players) p=null;
-		for(Carta c: carte) c=null;
+		for(int i=0; i < this.players.length; i++) this.players[i]=null;
+		for(int i=0; i < this.carte.length; i++) this.carte[i]=null;
 		n = 0;
 	}
 	

@@ -1,5 +1,6 @@
 package GUI;
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -7,12 +8,14 @@ import java.awt.GridLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import Logical.Carta;
 import Logical.Player;
 
 public class GUIPlayer extends JFrame{
 	private static GUIActivityFeed activityFeed = new GUIActivityFeed();
+	private JPanel gamePanel;
 	
 	private Player player;
 	
@@ -20,6 +23,7 @@ public class GUIPlayer extends JFrame{
 	
 	public GUIPlayer(Player p) {
 		super("Briscola");
+		//this.giocata = p.getGame().getGiocata().getGUI();
 		this.giocata = p.getGame().getGiocata().getGUI();
 		
 		this.player = p;
@@ -27,15 +31,34 @@ public class GUIPlayer extends JFrame{
 		this.setBounds(300, 100, 900, 700);
 		this.setMinimumSize(new Dimension(800, 700));
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.desing();
+		this.getContentPane().add(this.desing());
+		
 		this.setVisible(true);
 	}
 	
-	public void desing() {
-		this.getContentPane().setLayout(new BorderLayout());
-		this.add(leftPanel(), BorderLayout.WEST);
-		this.add(gamePanel());
+	public void aggiorna() {
+		//SwingUtilities.updateComponentTreeUI(this);
+		gamePanel = this.desing();
+		//this.repaint();
+		//this.setContentPane(gamePanel);
 		
+		
+		JFrame f = new JFrame();
+		f.add(gamePanel);
+		
+		this.setContentPane(f.getContentPane());
+		this.invalidate();
+		this.validate();
+		
+	}
+	
+	private JPanel desing() {
+		JPanel all = new JPanel();
+		all.setLayout(new BorderLayout());
+		all.add(leftPanel(), BorderLayout.WEST);
+		all.add(gamePanel());
+		
+		return all;
 		//this.repaint();
 	}
 	
@@ -103,7 +126,7 @@ public class GUIPlayer extends JFrame{
 		JPanel centerPanel = new JPanel();
 		centerPanel.setLayout(new FlowLayout());
 		//centerPanel.add(new Gap(), BorderLayout.WEST);
-		centerPanel.add(giocata);
+		centerPanel.add(giocata.getPanel());
 		
 		gamePanel.add(centerPanel);
 		
