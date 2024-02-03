@@ -3,6 +3,8 @@ package Logical;
 import GUI.GUIGiocata;
 
 public class Giocata {
+	private Gioco1v1 game;
+	
 	private GUIGiocata gui; 
 	
 	private Player[] players = new Player[2];
@@ -10,8 +12,9 @@ public class Giocata {
 	
 	private int n;
 	
-	public Giocata() {
+	public Giocata(Gioco1v1 g) {
 		n=0;
+		this.game = g;
 		for(Player p: players) p=null;
 		for(Carta c: carte) c=null;	
 		
@@ -35,8 +38,30 @@ public class Giocata {
 		n = 0;
 	}
 	
+	public void check() {
+		if(carte[0].getSeme().equals(carte[1].getSeme())) {		
+			if(carte[0].getValue() >= carte[1].getValue()) {
+				this.game.getTurno().setTurno(this.game.getTurno().getTurno());
+			} else {
+				this.game.getTurno().setTurno(!this.game.getTurno().getTurno());
+			}
+		} else {
+			if(carte[0].getSeme().equals(this.game.getBriscolaCard().getSeme())) {
+				this.game.getTurno().setTurno(this.game.getTurno().getTurno());
+			} else if(carte[1].getSeme().equals(this.game.getBriscolaCard().getSeme())) {
+				this.game.getTurno().setTurno(!this.game.getTurno().getTurno());
+			} else {
+				this.game.getTurno().setTurno(this.game.getTurno().getTurno());
+			}
+		}
+	}
+	
 	public int getPunti() {
-		return 0;
+		int punti=0;
+		for(Carta c: carte) {
+			punti += c.getValue();
+		}
+		return punti;
 	}
 	public GUIGiocata getGUI() {
 		return this.gui;

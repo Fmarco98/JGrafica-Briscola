@@ -23,25 +23,27 @@ public class CardSelectionButton extends JButton{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(c.getPlayer().getIndex() == c.getPlayer().getGame().getTurno().getIndexOfPlayingPlayer()) {
-					
 					Carta played = c.getPlayer().gioca(index);
 					c.getPlayer().getGame().getGiocata().addGiocata(played, c.getPlayer());
 					
 					for(Player p: c.getPlayer().getGame().getPlayers()) {
 						p.getGUI().aggiorna();
 					}
-					JFrame f = new JFrame();
-					f.setVisible(true);
-					f.setSize(400, 500);
-					f.getContentPane().add(c.getPlayer().getGame().getGiocata().getGUI().getPanel());
-					
 					c.getPlayer().getGame().getTurno().nextTurno();
 				}
 				if(c.getPlayer().getGame().getTurno().isTurnoComplete()) {
+					for(Player p: c.getPlayer().getGame().getPlayers()) {
+						p.getMano().pesca();
+						p.getGUI().aggiorna();
+					}
 					
-					
-					
+					c.getPlayer().getGame().getGiocata().check();
+					c.getPlayer().getGame().getPlayers()[c.getPlayer().getGame().getTurno().getIndexOfPlayingPlayer()].addPunti(c.getPlayer().getGame().getGiocata().getPunti());
 					c.getPlayer().getGame().getGiocata().clear();
+					
+					for(Player p: c.getPlayer().getGame().getPlayers()) {
+						p.getGUI().aggiorna();
+					}				
 				}
 			}
 		});

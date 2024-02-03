@@ -23,17 +23,12 @@ public class Mano {
 	}
 	
 	public void pesca() {
-		this.mano.add(mazzo.pesca());
+		Carta c = mazzo.pesca();
+		if(c != null) this.mano.add(c);
 	}
 	
 	@Override
 	public String toString() {
-		String s="";
-		
-		for(Carta c : this.mano) {
-			s += c.toString()+"\n";
-		}
-		
-		return s;
+		return this.mano.toString();
 	}
 }

@@ -3,7 +3,7 @@ package Logical;
 import GUI.GUIPlayer;
 
 public class Player{
-	private Gioco game;
+	private Gioco1v1 game;
 	
 	private int index;
 	private int punti;
@@ -12,7 +12,7 @@ public class Player{
 	
 	private GUIPlayer gui;
 	
-	public Player(String nome, Gioco game, int i) {
+	public Player(String nome, Gioco1v1 game, int i) {
 		this.index = i;
 		this.game = game;
 		this.punti = 0;
@@ -30,6 +30,9 @@ public class Player{
 	}
 	public int getPunti() {
 		return punti;
+	}
+	public void addPunti(int p) {
+		this.punti += p;
 	}
 	
 	public Carta gioca(int index) {
@@ -54,7 +57,7 @@ public class Player{
 	public String toString() {
 		return this.mano.toString();
 	}
-	public Gioco getGame() {
+	public Gioco1v1 getGame() {
 		return this.game;
 	}
 	public int getIndex() {
