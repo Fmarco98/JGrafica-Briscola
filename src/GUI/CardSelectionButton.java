@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import Games.Game;
 import Logical.Carta;
 import Logical.Giocata;
 import Logical.Player;
@@ -42,6 +43,7 @@ public class CardSelectionButton extends JButton{
 						}
 						refresh(players);
 						c.getPlayer().getGame().getTurno().nextTurno();
+						//Game.pause();
 					}
 					
 					if(c.getPlayer().getGame().getTurno().isTurnoComplete()) {

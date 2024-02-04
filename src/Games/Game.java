@@ -54,4 +54,12 @@ public abstract class Game {
 	public GUIActivityFeed getLOG() {
 		return log;
 	}
+	
+	public static void pause() {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 }
