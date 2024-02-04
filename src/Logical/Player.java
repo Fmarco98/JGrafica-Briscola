@@ -1,25 +1,31 @@
 package Logical;
 
 import GUI.GUIPlayer;
+import Games.Game;
+import Games.Gioco1v1;
 
 public class Player{
-	private Gioco1v1 game;
+	private Game game;
 	
 	private int index;
 	private int punti;
 	private String nome;
 	private Mano mano;
 	
-	private GUIPlayer gui;
+	private GUIPlayer gui=null;
 	
-	public Player(String nome, Gioco1v1 game, int i) {
+	public Player(String nome, Game game, int i) {
 		this.index = i;
 		this.game = game;
 		this.punti = 0;
 		this.nome = nome;
 		this.mano = new Mano(this.game.getMazzo());
-		
-		gui = new GUIPlayer(this);
+	}
+	
+	public void enableGUI() {
+		if(gui == null) {
+			gui = new GUIPlayer(this);
+		}
 	}
 	
 	public String getNome() {
@@ -57,7 +63,7 @@ public class Player{
 	public String toString() {
 		return this.mano.toString();
 	}
-	public Gioco1v1 getGame() {
+	public Game getGame() {
 		return this.game;
 	}
 	public int getIndex() {

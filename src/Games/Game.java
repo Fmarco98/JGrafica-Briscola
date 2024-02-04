@@ -1,11 +1,19 @@
-package Logical;
+package Games;
 
 import javax.swing.ImageIcon;
 
 import GUI.GUIActivityFeed;
+import Logical.Carta;
+import Logical.Giocata;
+import Logical.Mazzo;
+import Logical.Player;
+import Logical.Turno;
 
-public class Gioco1v1{
-	public static final ImageIcon ICO = new ImageIcon("src/icon/ProgIcon.png");
+public abstract class Game {
+	public static final String PATH = System.getProperty("user.dir");
+	public static final ImageIcon ICO = new ImageIcon(PATH+"\\src\\icon\\ProgIcon.png");
+	
+	private boolean thereIsBot;
 	
 	private Mazzo mazzo;
 	private Turno turno;
@@ -14,20 +22,20 @@ public class Gioco1v1{
 	private Carta briscola;
 	private GUIActivityFeed log;
 	
-	public Gioco1v1(String ...names) {
+	public Game(boolean bot) {
 		mazzo = new Mazzo();
 		turno = new Turno();
 		giocata = new Giocata(this);
 		briscola = new Carta(mazzo.getBriscola());
 		log = new GUIActivityFeed(this);
+		thereIsBot = bot;
 		
 		players = new Player[2];
-		for(int i=0; i < this.players.length; i++) {
-			this.players[i] = new Player(names[i], this, i);
-		}
-		log.addFeed(GUIActivityFeed.inizioGame(players));
 	}
 	
+	public boolean isThereBot() {
+		return thereIsBot;
+	}
 	public Mazzo getMazzo() {
 		return mazzo;
 	}

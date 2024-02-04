@@ -1,9 +1,10 @@
 package Logical;
 
 import GUI.GUIGiocata;
+import Games.Game;
 
 public class Giocata {
-	private Gioco1v1 game;
+	private Game game;
 	
 	private GUIGiocata gui; 
 	
@@ -12,7 +13,7 @@ public class Giocata {
 	
 	private int n;
 	
-	public Giocata(Gioco1v1 g) {
+	public Giocata(Game g) {
 		n=0;
 		this.game = g;
 		for(Player p: players) p=null;

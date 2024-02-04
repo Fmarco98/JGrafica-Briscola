@@ -19,12 +19,11 @@ public class Turno {
 	public boolean getTurno() {
 		return this.turno;
 	}
-	
+	public void reset() {
+		n = 0;
+	}
 	public boolean isTurnoComplete() {
 		boolean b = n == 2;
-		if(b) {
-			n = 0;
-		}
 		return b;
 	}
 	

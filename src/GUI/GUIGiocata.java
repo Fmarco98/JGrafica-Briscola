@@ -13,12 +13,8 @@ public class GUIGiocata{
 	
 	private Giocata giocata;
 	
-	private JLabel[] icons;
-	
 	public GUIGiocata(Giocata g) {
 		this.giocata = g;
-		
-		//this.disegna();
 	}
 	
 	public JPanel getPanel() {
@@ -29,7 +25,7 @@ public class GUIGiocata{
 		for(int i=0; i < this.giocata.getCarte().length; i++) {
 			JLabel icon = new JLabel();
 			if(this.giocata.getCarte()[i] != null) {
-				icon.setIcon(this.giocata.getCarte()[i].getFrontImage());
+				icon.setIcon(this.giocata.getCarte()[i].getCardImage());
 			} else {
 				icon.setIcon(img);
 			}
@@ -38,15 +34,4 @@ public class GUIGiocata{
 		
 		return giocataPanel;
 	}
-	
-	/*
-	private void disegna() {
-		
-	}
-	
-	public void aggiorna() {
-		this.
-		this.disegna();
-	}
-	*/
 }

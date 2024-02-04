@@ -1,19 +1,21 @@
 package Logical;
 import javax.swing.ImageIcon;
 
+import Games.Gioco1v1;
+
 public class Carta {
 	
 	private int index;
 	private String seme;
 	private int value;
-	private ImageIcon frontIcon;
+	private ImageIcon cardIcon;
 	private ImageIcon backIcon=null;
 	
 	public Carta(Carta c) {
 		this.index = c.index;
 		this.seme = c.seme;
 		this.value = c.value;
-		this.frontIcon = c.frontIcon;
+		this.cardIcon = c.cardIcon;
 		this.backIcon = c.backIcon;
 	}
 	
@@ -28,7 +30,7 @@ public class Carta {
 		};
 		
 		
-		this.frontIcon = new ImageIcon("src/icon/carte/"+ seme+index +".png");
+		this.cardIcon = new ImageIcon(Gioco1v1.PATH+"\\src\\icon\\carte\\"+ seme+index +".png");
 		//this.backIcon = new ImageIcon("src/icon/cartaBackIcon.png");
 		
 		this.value = value;
@@ -47,8 +49,8 @@ public class Carta {
 	public int getIndex() {
 		return index;
 	}
-	public ImageIcon getFrontImage() {
-		return frontIcon;
+	public ImageIcon getCardImage() {
+		return cardIcon;
 	}
 	public ImageIcon getBackImage() {
 		return backIcon;

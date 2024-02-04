@@ -1,4 +1,5 @@
 package GUI;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -8,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Games.Gioco1v1;
 import Logical.Player;
 
 public class GUIPlayer extends JFrame{
@@ -20,14 +22,14 @@ public class GUIPlayer extends JFrame{
 
 	public GUIPlayer(Player p) {
 		super("Briscola - "+p.getNome());
-		this.setIconImage(p.getGame().ICO.getImage());
+		this.setIconImage(Gioco1v1.ICO.getImage());
 		this.giocata = p.getGame().getGiocata().getGUI();
 		this.activityFeed = p.getGame().getLOG();
 		
 		this.player = p;
 
 		this.setBounds(300, 100, 900, 700);
-		this.setMinimumSize(new Dimension(800, 700));
+		this.setMinimumSize(new Dimension(870, 700));
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.getContentPane().add(this.design());
 
@@ -63,10 +65,12 @@ public class GUIPlayer extends JFrame{
 	private JPanel leftPanel() {
 		JPanel p = new JPanel();
 		p.setLayout(new BorderLayout());
+		//p.setMinimumSize(new Dimension(300, 700));
+		p.setPreferredSize(new Dimension(200, 700));
 
 		JPanel topPanel = new JPanel();
 		topPanel.setLayout(new FlowLayout());
-		JLabel plName = new JLabel("                   "+this.player.getNome()+"                   ");
+		JLabel plName = new JLabel(this.player.getNome());
 		topPanel.add(plName);
 		p.add(topPanel, BorderLayout.NORTH);
 
@@ -95,7 +99,7 @@ public class GUIPlayer extends JFrame{
 		selectionPanel.setLayout(new FlowLayout());
 		for(int i=0; i < this.player.getMano().getMano().size(); i++) {
 			CardSelectionButton button = new CardSelectionButton(/*this.player.getMano().getMano().get(i), */ this.player, i);
-			button.setIcon(this.player.getMano().getMano().get(i).getFrontImage());
+			button.setIcon(this.player.getMano().getMano().get(i).getCardImage());
 
 			selectionPanel.add(button);
 		}
@@ -107,7 +111,7 @@ public class GUIPlayer extends JFrame{
 
 		JPanel briscolaPanel = new JPanel();
 		JLabel icon = new JLabel();
-		icon.setIcon(this.player.getGame().getBriscolaCard().getFrontImage());
+		icon.setIcon(this.player.getGame().getBriscolaCard().getCardImage());
 		briscolaPanel.add(icon);
 
 		gamePanel.add(briscolaPanel, BorderLayout.WEST);

@@ -2,16 +2,16 @@ package GUI;
 import javax.swing.BorderFactory;
 import javax.swing.JTextArea;
 
+import Games.Game;
 import Logical.Giocata;
-import Logical.Gioco1v1;
 import Logical.Player;
 
 public class GUIActivityFeed{
-	private Gioco1v1 game;
+	private Game game;
 	
 	private String txt;
 	
-	public GUIActivityFeed(Gioco1v1 g) {
+	public GUIActivityFeed(Game g) {
 		txt = "";
 		this.game = g;
 	}
@@ -28,7 +28,9 @@ public class GUIActivityFeed{
 	
 	public void addFeed(String s) {
 		txt += s+'\n';
-		for(Player p: game.getPlayers()) p.getGUI().aggiorna();
+		for(Player p: game.getPlayers()) {
+			if(p.getGUI() != null) p.getGUI().aggiorna();
+		}
 	}
 	
 	public static String inizioGame(Player ...players) {
