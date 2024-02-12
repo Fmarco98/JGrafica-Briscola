@@ -8,15 +8,19 @@ public class Bot extends Player{
 		super("Bot", game, index);
 	}
 	
+	@Override
 	public Carta gioca(int i) {
-		
-		for(Carta c : super.getMano().getMano()) {
-			if(c.getSeme() == super.getGame().getBriscolaCard().getSeme()) {
-				return super.gioca(super.getMano().getMano().indexOf(c));
+		if(super.getMano().getMano().size() != 0) {
+			for(Carta c : super.getMano().getMano()) {
+				if(c.getSeme() == super.getGame().getBriscolaCard().getSeme()) {
+					return super.gioca(super.getMano().getMano().indexOf(c));
+				}
 			}
+			return super.gioca((int)(Math.random()*super.getMano().getMano().size()));			
 		}
-		return super.gioca((int)(Math.random()*super.getMano().getMano().size()));
+		return null;
 	}
 	
+	@Override
 	public void enableGUI() {}
 }

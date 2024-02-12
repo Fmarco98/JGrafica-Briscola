@@ -3,6 +3,7 @@ package Games;
 import javax.swing.ImageIcon;
 
 import GUI.GUIActivityFeed;
+import GUI.GUIPlayer;
 import Logical.Carta;
 import Logical.Giocata;
 import Logical.Mazzo;
@@ -53,6 +54,14 @@ public abstract class Game {
 	}
 	public GUIActivityFeed getLOG() {
 		return log;
+	}
+	
+	public void end() {
+		System.out.println("finito");
+		for( Player p: players) {
+			GUIPlayer g = p.getGUI();
+			if(g != null) g.dispose();
+		}
 	}
 	
 	public static void pause() {

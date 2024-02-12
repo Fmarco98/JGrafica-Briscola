@@ -61,7 +61,7 @@ public class Player{
 	}
 	
 	public String toString() {
-		return this.mano.toString();
+		return "Index: "+this.index+": "+this.mano.toString();
 	}
 	public Game getGame() {
 		return this.game;

@@ -9,29 +9,34 @@ import javax.swing.JPanel;
 import Logical.Carta;
 import Logical.Giocata;
 
-public class GUIGiocata{
+public class GUIGiocata extends JPanel{
+	public static final ImageIcon VOID_CARD = new ImageIcon("src/icon/CartaVoid.png");
 	
 	private Giocata giocata;
 	
 	public GUIGiocata(Giocata g) {
 		this.giocata = g;
+		
+		this.setLayout(new GridLayout(1, 2));
+		
+		this.loadCards(this.giocata.getCarte());
 	}
 	
-	public JPanel getPanel() {
-		JPanel giocataPanel = new JPanel();
-		giocataPanel.setLayout(new GridLayout(1, 2));
-		ImageIcon img = new ImageIcon("src/icon/CartaVoid.png");
-		
-		for(int i=0; i < this.giocata.getCarte().length; i++) {
+	private void loadCards(Carta[] carte) {
+		for(int i=0; i < carte.length; i++) {
 			JLabel icon = new JLabel();
 			if(this.giocata.getCarte()[i] != null) {
 				icon.setIcon(this.giocata.getCarte()[i].getCardImage());
 			} else {
-				icon.setIcon(img);
+				icon.setIcon(VOID_CARD);
 			}
-			giocataPanel.add(icon);
+			this.add(icon);
 		}
+	}
+	
+	public void refresh() {
+		this.removeAll();
 		
-		return giocataPanel;
+		this.loadCards(this.giocata.getCarte());
 	}
 }

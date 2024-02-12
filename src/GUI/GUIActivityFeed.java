@@ -6,7 +6,7 @@ import Games.Game;
 import Logical.Giocata;
 import Logical.Player;
 
-public class GUIActivityFeed{
+public class GUIActivityFeed extends JTextArea{
 	private Game game;
 	
 	private String txt;
@@ -14,9 +14,18 @@ public class GUIActivityFeed{
 	public GUIActivityFeed(Game g) {
 		txt = "";
 		this.game = g;
+		
+		this.createTxtArea();
 	}
 	
-	public JTextArea getThing() {
+	private void createTxtArea() {
+		this.setEditable(false);
+		this.setBorder(BorderFactory.createTitledBorder("LOG:"));
+		
+		this.setText(txt);
+	}
+	
+	/*public JTextArea getThing() {
 		JTextArea area = new JTextArea();
 		area.setEditable(false);
 		area.setBorder(BorderFactory.createTitledBorder("LOG:"));
@@ -24,13 +33,14 @@ public class GUIActivityFeed{
 		area.setText(txt);
 		
 		return area;
-	}
+	}*/
 	
 	public void addFeed(String s) {
 		txt += s+'\n';
-		for(Player p: game.getPlayers()) {
+		this.append(s+'\n');
+		/*for(Player p: game.getPlayers()) {
 			if(p.getGUI() != null) p.getGUI().aggiorna();
-		}
+		}*/
 	}
 	
 	public static String inizioGame(Player ...players) {
